@@ -3,7 +3,7 @@ import java.util.TreeMap;
 
 public class RoomScheduler {
 	private static TreeMap<String, Integer> Rooms;
-	
+	private static TreeMap<String, Room> rooms;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
