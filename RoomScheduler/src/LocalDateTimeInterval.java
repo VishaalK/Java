@@ -4,6 +4,7 @@ public class LocalDateTimeInterval {
 	private LocalDateTime start_time;
 	private LocalDateTime end_time;
 	
+	//constructor 
 	public LocalDateTimeInterval(LocalDateTime start, LocalDateTime end) {
 		start_time = start;
 		end_time = end;
