@@ -20,7 +20,7 @@ public class RoomScheduler {
 		
 		System.out.println("Welcome to Meeting Scheduler!");
 		
-		//pointers to functions ?
+		//pointers to functions ? NOT POSSIBLE
 		Scanner cin = new Scanner(System.in);
 		while (true) {
 			System.out.print("Enter command: ");
