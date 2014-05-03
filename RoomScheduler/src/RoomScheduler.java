@@ -16,7 +16,12 @@ public class RoomScheduler {
 			System.out.println("Num_rooms: " + num_rooms);
 		}
 		
+		//generate the rooms 
 		Rooms = new TreeMap<String, Integer>(); 
+		for (int i = 0; i < num_rooms; ++i) {
+			Rooms.put("Room #" + i, i);
+		}
+		
 		
 		System.out.println("Welcome to Meeting Scheduler!");
 		
@@ -25,19 +30,23 @@ public class RoomScheduler {
 		while (true) {
 			System.out.print("Enter command: ");
 			String line = cin.next();
+			//show, reserve any room, reserve specific room, removed reservation
 			if (line.equals("quit")) {
 				break;
+			} else if (line.equals("show")) {
+				for(Entry<String, Integer> entry : Rooms.entrySet()) {
+					  String key = entry.getKey();
+					  Integer value = entry.getValue();
+
+					  System.out.println(key + " => " + value);
+				}
+			} else {
+				System.out.println("Unrecognized command!");
 			}
 			Rooms.put(line, 5);
 			System.out.println(line);
-			
 		}
-		for(Entry<String, Integer> entry : Rooms.entrySet()) {
-			  String key = entry.getKey();
-			  Integer value = entry.getValue();
-
-			  System.out.println(key + " => " + value);
-		}
+		
 		return;
 	}
 
