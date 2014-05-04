@@ -1,6 +1,7 @@
 import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.TreeMap;
+import org.joda.time.*;
 
 public class RoomScheduler {
 	private static TreeMap<String, Integer> Rooms;
@@ -21,7 +22,7 @@ public class RoomScheduler {
 		for (int i = 0; i < num_rooms; ++i) {
 			Rooms.put("Room #" + i, i);
 		}
-		
+		DateTime now = new DateTime();
 		
 		System.out.println("Welcome to Meeting Scheduler!");
 		
@@ -40,11 +41,19 @@ public class RoomScheduler {
 
 					  System.out.println(key + " => " + value);
 				}
+			} else if (line.equals("add")) {
+				//add <key> <value>
+				String key = cin.next(); String value = cin.next();
+				try { 
+					Rooms.put(key, Integer.parseInt(value));
+				} catch(NumberFormatException nfe) {
+					System.out.println("Value must be an integer!");
+				}
 			} else {
 				System.out.println("Unrecognized command!");
 			}
-			Rooms.put(line, 5);
-			System.out.println(line);
+			//Rooms.put(line, 5);
+			//System.out.println(line);
 		}
 		
 		return;
