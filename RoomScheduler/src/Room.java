@@ -51,4 +51,10 @@ public class Room {
 	public void add_reservation(LocalDateTime start, LocalDateTime end) {
 		System.out.println("Do nothing for now");
 	}
+	
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		result.append(name + " Location: ( " + location.x + ", " + location.y + ")");
+		return result.toString();
+	}
 }

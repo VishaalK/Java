@@ -19,7 +19,9 @@ public class RoomScheduler {
 		
 		//generate the rooms 
 		Rooms = new TreeMap<String, Integer>(); 
+		rooms = new TreeMap<String, Room>();
 		for (int i = 0; i < num_rooms; ++i) {
+			rooms.put("room " + i, new Room("room " + i));
 			Rooms.put("Room #" + i, i);
 		}
 		DateTime now = new DateTime();
@@ -35,11 +37,16 @@ public class RoomScheduler {
 			if (line.equals("quit")) {
 				break;
 			} else if (line.equals("show")) {
-				for(Entry<String, Integer> entry : Rooms.entrySet()) {
+				/*for(Entry<String, Integer> entry : Rooms.entrySet()) {
 					  String key = entry.getKey();
 					  Integer value = entry.getValue();
 
 					  System.out.println(key + " => " + value);
+				}*/
+				for (Entry<String, Room> entry: rooms.entrySet()) {
+					String key = entry.getKey();
+					Room r = entry.getValue();
+					System.out.println(key + " => " + r.toString());
 				}
 			} else if (line.equals("add")) {
 				//add <key> <value>
