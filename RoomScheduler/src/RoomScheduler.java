@@ -1,28 +1,47 @@
+import java.awt.Point;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.TreeMap;
+
 import org.joda.time.*;
 
 public class RoomScheduler {
-	private static TreeMap<String, Integer> Rooms;
+	private TreeMap<String, Integer> Rooms;
 	private static TreeMap<String, Room> rooms;
 	
+	//should be a default constructor that makes the rooms, like a controller
+	public RoomScheduler() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public RoomScheduler(int numRooms) {
+		Rooms = new TreeMap<String, Integer>();
+		System.out.println("RoomScheduler with " + numRooms + " rooms created");
+		for (int i = 0; i < numRooms; ++i) {
+			Rooms.put("Room #" + i, i);
+		}
+	}
+	
+
 	public static void main(String[] args) {
 		//args[0] = # of rooms
+		int num_rooms = 5;
+		if (args.length == 1) {
+			num_rooms = Integer.parseInt(args[0]);
+		}
+		RoomScheduler rs = new RoomScheduler(5);
 		
-		//if args[0] > 0, put in generated room names, else default to 5 rooms
-		int num_rooms = new Integer(5);
 		if (args.length == 1) {
 			num_rooms = Integer.parseInt(args[0]);
 			System.out.println("Num_rooms: " + num_rooms);
 		}
 		
-		//generate the rooms 
-		Rooms = new TreeMap<String, Integer>(); 
+		String[] names = {"April's", "Bahamas", "Charley's", "David's", "Eugene's"};
 		rooms = new TreeMap<String, Room>();
 		for (int i = 0; i < num_rooms; ++i) {
-			rooms.put("room " + i, new Room("room " + i));
-			Rooms.put("Room #" + i, i);
+			rooms.put(names[i], new Room(names[i]));
+			//rooms.put("room " + i, new Room("room " + i));
+			//Rooms.put("Room #" + i, i);
 		}
 		DateTime now = new DateTime();
 		
@@ -37,25 +56,37 @@ public class RoomScheduler {
 			if (line.equals("quit")) {
 				break;
 			} else if (line.equals("show")) {
-				/*for(Entry<String, Integer> entry : Rooms.entrySet()) {
-					  String key = entry.getKey();
-					  Integer value = entry.getValue();
-
-					  System.out.println(key + " => " + value);
-				}*/
 				for (Entry<String, Room> entry: rooms.entrySet()) {
 					String key = entry.getKey();
 					Room r = entry.getValue();
 					System.out.println(key + " => " + r.toString());
 				}
-			} else if (line.equals("add")) {
-				//add <key> <value>
-				String key = cin.next(); String value = cin.next();
+			} else if (line.equals("add_room")) {
+				//add <room_name> <loc_x> <loc_y>
+				String room_name = cin.next(); 
+				String loc_x = cin.next();
+				String loc_y = cin.next();
 				try { 
-					Rooms.put(key, Integer.parseInt(value));
+					rooms.put(room_name, new Room(room_name, new Point(Integer.parseInt(loc_x), Integer.parseInt(loc_y))));
 				} catch(NumberFormatException nfe) {
 					System.out.println("Value must be an integer!");
 				}
+			} else if (line.equals("add_reservation")) {
+				//<room_name> <integer>
+				//find room by Name, throw exception if doesnt exist
+				String name = cin.next();
+				if (!rooms.containsKey(name)) {
+					continue;
+				}
+				String val = cin.next(); 
+				try {
+					int n = Integer.parseInt(val);
+					rooms.get(name).add_reservation(n);
+				} catch(NumberFormatException nfe) {
+					System.out.println("Value must be an integer!");
+				}
+				//add an integer
+				//throw exception if not possible
 			} else {
 				System.out.println("Unrecognized command!");
 			}

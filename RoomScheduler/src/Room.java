@@ -54,7 +54,14 @@ public class Room {
 	
 	public String toString() {
 		StringBuilder result = new StringBuilder();
-		result.append(name + " Location: ( " + location.x + ", " + location.y + ")");
+		result.append(name + " Location: (" + location.x + ", " + location.y + ")");
+		result.append(System.getProperty("line.separator"));
+		if (!reservations.isEmpty()) {
+			for (int i: reservations) {
+				result.append(i + " ");
+			}
+			result.append(System.getProperty("line.separator"));
+		}
 		return result.toString();
 	}
 }
