@@ -9,6 +9,7 @@ public class Room {
 	private String name;
 	private Point location;
 	private Set<Integer> reservations;
+	//private Set<Room
 	
 	public static void main(String[] args) {
 		System.out.print("I'm a room!\n");
